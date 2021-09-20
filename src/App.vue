@@ -1,28 +1,48 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div class="nav">
+      <template v-for="(link, index) in navigationLinks">
+        <router-link :key="index" :to="link.to">{{ link.title }}</router-link>
+        <template v-if="index < navigationLinks.length - 1"> | </template>
+      </template>
+    </div>
+    <router-view />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import { DASHBOARD_ROUTE_NAME, LOGIN_ROUTE_NAME } from '@/constants/routes';
 
 export default {
-  name: "App",
-  components: {
-    HelloWorld,
+  name: 'App',
+  computed: {
+    navigationLinks() {
+      return [
+        { to: { path: '/' }, title: 'Home' },
+        { to: { name: LOGIN_ROUTE_NAME }, title: 'Login' },
+        { to: { name: DASHBOARD_ROUTE_NAME }, title: 'Dashboard' },
+      ];
+    },
   },
 };
 </script>
 
 <style lang="scss">
+$--green: #42b983;
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.nav {
+  padding: 30px;
+
+  a {
+    font-weight: $--font-weight-bold;
+
+    &.router-link-exact-active {
+      color: $--green;
+    }
+  }
 }
 </style>
