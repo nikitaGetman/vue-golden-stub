@@ -102,7 +102,7 @@ class AuthService {
         const model = { login, someProperty: 'Какое-то значение модели авторизации' };
         this.setAuthTokens({ access: btoa(`${login}:${password}`), refresh: btoa(`${login}:${password}`) });
         resolve(model);
-      }, 3000);
+      }, 1000);
     });
   }
 
@@ -111,7 +111,7 @@ class AuthService {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve();
-      }, 3000);
+      }, 1000);
     }).then(() => {
       this.removeAuthTokens();
     });

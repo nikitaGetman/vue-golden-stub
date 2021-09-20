@@ -27,4 +27,13 @@ module.exports = {
     'vue/padding-line-between-blocks': ['error', 'always'],
     'vue/require-direct-export': 'error',
   },
+
+  overrides: [
+    {
+      files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };
